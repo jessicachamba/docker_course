@@ -4,7 +4,7 @@
  * [Que es Docker](#que-es-docker)
  * [Instalando Docker](#instalando-docker)
  * [Como trabaja Docker](#como-trabaja-docker)
- * [Contenedores, Qué son?](#contenedores-que-son)
+ * [Contenedores](#contenedores)
  * [Ciclo de vida de un contenedor](#ciclo-de-vida-de-un-contenedor)
  * [Exponer contenedores a la maquina local](#exponer-contenedores-a-la-maquina-local)
  * [Información "By Mount" y "Volumens"](#informacion-by-mount-y-volumens)
@@ -105,7 +105,7 @@ Al mismo tiempo los componentes de Docker permiten realizar la gestión de las m
 
 ![image](https://user-images.githubusercontent.com/6383659/136436888-33488a2c-54ae-4850-867a-f4f988a1d762.png)
 
-## Contenedores, Qué son?
+## Contenedores
 
 - Son el concepto más importante de Docker
 - A nivel de virtualización es el equivalente a una máquina virtual pero más liviana
