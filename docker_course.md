@@ -7,9 +7,9 @@
  * [Contenedores](#contenedores)
  * [Ciclo de vida de un contenedor](#ciclo-de-vida-de-un-contenedor)
  * [Exponer contenedores a la maquina local](#exponer-contenedores-a-la-maquina-local)
- * [Información "By Mount" y "Volumens"](#informacion-by-mount-y-volumens)
+ * [Informacion By Mount y Volumens](#informacion-by-mount-y-volumens)
  * [Las imagenes en Docker](#las-imágenes-en-docker)
- * [Docker Network](#dockernetwork)
+ * [Docker Network](#docker-network)
  * [Asignando variables de entorno](#asignando-variables-de-entorno)
  * [Docker Compose](#docker-compose)
  * [Docker Ignore](#docker-ignore)
@@ -142,7 +142,7 @@ docker run --name ubuntu_container -p 8080:80 ubuntu
 > **Nota:** Esto es sumamente útil cuando se realiza trabajo de desarrollo con servidores tipo Node, XAMPP, etc.
 
 
-## Información “By Mount” y “Volumens”
+## Informacion By Mount y Volumens
 
 La información de los archivos y carpetas es gestionada por Docker de dos formar distintas según las necesidades de cada caso, las opciones disponibles son:
 
@@ -378,195 +378,193 @@ cmd "/loop.sh"
 Ejecutar y crear contenedores especificando el nombre de imagen
 ```sh
 docker run {image-name}
-```
-
+```   
+---
 Ejecutar, crear y nombre a un contenedor
 ```sh
 docker run --name {container-name} {image-name}
 ```
-
+---
 Ejecutar un contenedor en modo iterativo de terminal
 ```sh
 docker run -it {image-name}
 ```
-
+---
 Ejecutar, crear y nombrar un contenedor en modo background (-d) sin que su ejecución termine (por conclusión del main proces), para eso se envía a ejecutar el siguiente comando (tail -f dev/null)
 ```sh
 docker run --name {container-name} -d {image-name} {comand}
 ```
-
+---
 Ejecutar, crear, nombrar un contenedor y exponer los puertos de un contenedor (la bandera -d se puede usar para no enchufar la terminal)
 ```sh
 docker run --name {container-name} -p {local-port}:{container-port} {image-name}
 ```
-
+---
 Ejecutar, crear, nombrar un contenedor y montar una carpeta mediante "By Mount" (se usa la bandera -v) junto con modalidad background de terminal (-d)
 ```sh
 docker run --name {container-name} -d -v {local-route}:{image-route} {image-name}
 ```
-
+---
 Ejecutar, crear, nombrar un contenedor y montar un volumen mediante "Volumen" (se usa la bandera --mount)
 ```sh
 docker run --name {container-name} --mount src={volumen-name},dst={route-image} {image-name}
 ```
-
+---
 Ejecutar, crear, nombrar un contenedor limitando la memoria de contendor (tener cuidado porque si una app no tiene la memoria suficiente puede fallar)
 ```sh
 docker run -d --name {container-name} --memory {memory-space} {image-name}
 ```
-
+---
 Asignar variables de entorno
 ```sh
 docker run -d -name {container_name} --env {varible_name}={variable_value} {image_name}
 ```
-
+---
 Ejecutar, crear, nombrar un contenedor y eliminar el contenedor al terminar el main proces
 ```sh
 docker run --rm {image-name}
 ```
-
-
+---
 Ejecutar un comando en un contenedor que se encuentra en ejecución
 ```sh
 docker exce -it {container-name} {comand}
 ```
-
+---
 Crear un volumen de docker
 ```sh
 docker volume {volume-name}
 ```
-
+---
 Copiar archivos desde ruta local hasta contenedor (el formato de la ruta del contenedor es **name:ruta**)
 ```sh
 docker cp {local file} {container route}
 ```
-
+---
 Copiar archivos desde contenedor hasta ruta local (el formato de la ruta del contenedor es **name:ruta**)
 ```sh
 docker cp {container route} {Re-name local file}
 ```
-
+---
 Crear imagen, la bandera -t indica el nombre o tag usado en la imagen (el formato usado en el nombre del tag es username/program), el contexto por lo regular se usa "." para la carpeta en la que uno se encuentra
 ```sh
 docker build -t {image-name} {context route}
 ```
-
+---
 Cambiar de Tag a una imagen
 ```sh
 docker tag {old tag name} {new tag name}
 ```
-
+---
 Login docker en docker hub
 ```sh
 docker login
 ```
-
+---
 Efectuar push a docker hub
 ```sh
 docker push {image}
 ```
-
+---
 Crear red de docker
 ```sh
 docker network create --attachable {network-name}
 ```
-
+---
 Conectar un contenedor a una red
 ```sh
 docker network connet {network-name} {container name}
 ```
-
+---
 Revisar historial de la imagen (el nombre de la imagen es opcional para efectuar la búsqueda)
 ```sh
 docker history {image-name}
 ```
-
+---
 Revisar logs de los contenedores
 ```sh
 docker logs {container-name}
 ```
-
+---
 Renombrar nombre del contenedor
 ```sh
 docker rename {old-name} {new-name}
 ```
-
+---
 Mostrar los contenedores activos (usando la bandera **-a** se muestran todos los contendores incluso los detenidos) 
 ```sh
 docker ps
 ```
-
+---
 Eliminar un contendor
 ```sh
 docker rm {container-name/id}
 ```
-
+---
 Eliminar todos los contenedores que estén detenidos
 ```sh
 docker container prune
 ```
-
+---
 Inspeccionar los contenedores (sobre todo útil para revisar errores) 
 ```sh
 docker inspect {container-name/id}
 ```
-
+---
 Inspeccionar los contenedores utilizando filtro (se destaca que la búsqueda se realiza en un formato JSON)
 ```sh
 docker inspect --format '{{.Key.Key}}' {container-name/id}
 ```
-
+---
 Revisar los recursos que consumen los contenedores
 ```sh
 docker stats
 ```
-
+---
 Detener contenedores (Enviando Sig Term)
 ```sh
 docker stop {container-name}
 ```
-
+---
 Detener contenedores (Enviando Sig Kill)
 ```sh
 docker kill {container-name}
 ```
-
+---
 Eliminar contenedores no usados (la bandera -q permite mostrar solo los ids de los contenedores)
 ```sh
 docker rm -f $(docker ps -aq)
 ```
-
+---
 Eliminar elementos ml tageados o tags asignados con "none"
 ```sh
 docker system prune
 ```
-
-
+---
 Se encarga de crear los elementos mencionados en el archivo yml y permite levantar el entorno especificado en el archivo 
 ```sh
 docker-compose up
 ```
-
+---
 Permite revisar los logs de los servicios levantados, la parte -f {name} es opcional y permite especificar el nombre del servicio
 ```sh
 docker-compose logs -f {name}
 ```
-
+---
 Ejecutar comandos en los contenedores de los servicios
 ```sh
 docker-compose exec {name} {comand}
 ```
-
+---
 Revisar componentes levantados
 ```sh
 docker-compose ps
 ```
-
+---
 Detener y eliminar componentes
 ```sh
 docker-compose down
 ```
-
+---
 Ejecutar build dentro de compose
 ```sh
 docker-compose build
