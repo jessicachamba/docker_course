@@ -37,18 +37,18 @@ El proceso de instalación de Docker tanto para Mac,Linus o Windows es sumamente
 * (Fedora)[https://docs.docker.com/engine/install/fedora/]
 * (Ubuntu)[https://docs.docker.com/engine/install/ubuntu/]
 
-> **Nota:** Adicional si se esta utilizndo Windows 10 en su version Home se debe realizar el siguiente proceso
+> **Nota:** Adicional si se esta utilizndo Windows 10 en su version Home se debe realizar el siguiente proceso:
 
-1. Activa estas casillas de Hypervisor, Maquina Virtual y Subystem for Linux
+1. Activa estas casillas de Hypervisor, Maquina Virtual y Subystem for Linux.
  
  ![image](https://user-images.githubusercontent.com/6383659/136433180-07d46873-7096-4048-b331-79c53dec8764.png)
 
  
-2. Sigue este (tutorial}(https://docs.microsoft.com/en-us/windows/wsl/install) y utiliza wsl2 la nueva versión mejorada lanzada en 2020 WSL2
+2. Sigue este (tutorial}(https://docs.microsoft.com/en-us/windows/wsl/install) y utiliza wsl2 la nueva versión mejorada lanzada en 2020 WSL2.
 
-3. [Instala Docker Desktop](https://www.docker.com/products/docker-desktop) , te dara un breve tutorial y te pedira cerrar sesión al terminar
+3. [Instala Docker Desktop](https://www.docker.com/products/docker-desktop) , te dara un breve tutorial y te pedira cerrar sesión al terminar.
 
-4. Prueba los comandos de docker desde la terminal de wsl2
+4. Prueba los comandos de docker desde la terminal de wsl2.
 
 
 ## Como trabaja Docker
@@ -57,9 +57,9 @@ Docker enfrenta los problemas del desarrollo utilizando un enfoque que originalm
 
 En el enfoque tradicional de la "Virtualización" como solución de los problemas de la construcción de software la idea era muy simple, utilizar maquinas virtuales que permitieran a los desarrolladores emular los ambientes productivos o de desarrollo según fuera necesario, sin embargo, este enfoque tiene múltiples problemas entre los cuales destacan:
 
-**Peso:** Las máquinas virtuales son pesadas y lentas, ocupando varias GB de espacio, sumado a que si se desea disponer de dos ambientes que implementen el mismo SO es necesario duplicar todos los archivos del sistema origen, dando como resultado mucha información repetida y no relevante. Además, si imaginamos un contexto donde tenemos la necesidad de trabajar con múltiples sistemas operativos, nos encontraremos en una situación sumamente compleja, en la cual muchas veces no contaremos con el espacio necesario para trabajar
+**Peso:** Las máquinas virtuales son pesadas y lentas, ocupando varias GB de espacio, sumado a que si se desea disponer de dos ambientes que implementen el mismo SO es necesario duplicar todos los archivos del sistema origen, dando como resultado mucha información repetida y no relevante. Además, si imaginamos un contexto donde tenemos la necesidad de trabajar con múltiples sistemas operativos, nos encontraremos en una situación sumamente compleja, en la cual muchas veces no contaremos con el espacio necesario para trabajar.
 
-**Costo de administración:** Al administrar múltiples máquinas virtuales cada una debe ser administrada por separado y en circunstancia en las cuales se trabaja con una cantidad considerable se maquinas virtuales el costo necesario de mantener el sistema operativo actualizado, gestionar usuarios, permisos, etc. es un punto muy importante a considerar
+**Costo de administración:** Al administrar múltiples máquinas virtuales cada una debe ser administrada por separado y en circunstancia en las cuales se trabaja con una cantidad considerable se maquinas virtuales el costo necesario de mantener el sistema operativo actualizado, gestionar usuarios, permisos, etc. es un punto muy importante a considerar.
 
 **Diferencia entre formatos:** A lo largo de los  años las diferentes corporaciones han ideado un conjunto de formatos para trabajar con máquinas virtuales (VMDK, VDI, VHD) sin embargo la inexistencia de un estándar en la industria  puede ser un problema en especial cuando se quiere migrar el contenido de una maquina visual a otra.
 
@@ -67,17 +67,17 @@ Ante estos problemas la respuesta de Docker fue muy sencilla "estandarizar la co
 
 Las ventajas de brinda Docker al utilizar los Contenedores como medio para efectuar la virtualización son los siguientes:
 
-**Flexible:** Al utilizar contenedores se puede virtualizar cualquier programa o sistema operativo, dando gran flexibilidad y operatividad
+**Flexible:** Al utilizar contenedores se puede virtualizar cualquier programa o sistema operativo, dando gran flexibilidad y operatividad.
 
-**Portable:** Los contenedores pueden ser ejecutados en cualquier computador con Docker instalado y su funcionamiento será exactamente el mismo en todos los computadores
+**Portable:** Los contenedores pueden ser ejecutados en cualquier computador con Docker instalado y su funcionamiento será exactamente el mismo en todos los computadores.
 
-**Liviano:** Docker funciona con una tecnología de virtualización en capas lo que permite ahorrar espacio reutilizando el Kernel del propio sistema operativo
+**Liviano:** Docker funciona con una tecnología de virtualización en capas lo que permite ahorrar espacio reutilizando el Kernel del propio sistema operativo.
 
-**Bajo acoplamiento:** Cada contenedor es autocontenido y posee todo lo q se necesita para su ejecución
+**Bajo acoplamiento:** Cada contenedor es autocontenido y posee todo lo q se necesita para su ejecución.
 
-**Escalable:** Es fácil de escalar pues solo se necesita crear más instancias del mismo contenedor para incrementar los recursos
+**Escalable:** Es fácil de escalar pues solo se necesita crear más instancias del mismo contenedor para incrementar los recursos.
 
-**Seguro:** Los contenedores de Docker al permitir la virtualización de manera autocontenida limitan el acceso a partes del sistema operativo anfitrión a las cuales no se debería tener acceso
+**Seguro:** Los contenedores de Docker al permitir la virtualización de manera autocontenida limitan el acceso a partes del sistema operativo anfitrión a las cuales no se debería tener acceso.
 
 ![image](https://user-images.githubusercontent.com/6383659/136452562-281c2c21-7a9a-43f6-a88a-ff6d5cfaef1a.png)
 
@@ -86,21 +86,21 @@ Las ventajas de brinda Docker al utilizar los Contenedores como medio para efect
 
 Docker como plataforma se componen de 3 componente principales que gestionan su funcionamiento, dichos componentes se articulan de manera anidada y sus principales funcionalidades son:
 
-**Docker Daemon:**  Es el encargado de gestionar los contenedores y la comunicación con el SO del computador anfitrión (normalmente se correlaciona con un servicio que se levanta para trabajar con Docker)
+**Docker Daemon:**  Es el encargado de gestionar los contenedores y la comunicación con el SO del computador anfitrión (normalmente se correlaciona con un servicio que se levanta para trabajar con Docker).
 
-**Rest API:**  Es la forma en la que **Docker Daemon** permite comunicación entrante, esto lo realiza mediante API que no solo se expone a nivel de aplicación (para que sea consumido por otros programas dentro del computador) si no que también puede ser configurado para ser expuesto a nivel de red (para agentes externos, aunque esta práctica no se recomienda)
+**Rest API:**  Es la forma en la que **Docker Daemon** permite comunicación entrante, esto lo realiza mediante API que no solo se expone a nivel de aplicación (para que sea consumido por otros programas dentro del computador) si no que también puede ser configurado para ser expuesto a nivel de red (para agentes externos, aunque esta práctica no se recomienda).
 
-**Client Docker CLI:**  Es la terminar mediante la cual se consume el API y permite comunicación con el Docker Daemon (debido a ser un simple CLI, esta comunicación se puede realizar con cualquier otro cliente configurado correctamente)
+**Client Docker CLI:**  Es la terminal mediante la cual se consume el API y permite comunicación con el Docker Daemon (debido a ser un simple CLI, esta comunicación se puede realizar con cualquier otro cliente configurado correctamente).
 
 Al mismo tiempo los componentes de Docker permiten realizar la gestión de las múltiples entidades utilizadas por Docker para la virtualización, estas entidades son:
 
-**Conteiners:** Es el corazón de Docker y donde se ejecutan las aplicaciones
+**Conteiners:** Es el corazón de Docker en el cual se ejecutan las aplicaciones.
 
-**Images:** Son artefactos usados para empaquetar contenedores (son como las plantillas usadas para generar contenedores)
+**Images:** Son artefactos usados para empaquetar contenedores (son como las plantillas usadas para generar contenedores).
 
-**Data volumens:** Son la forma acceder a los archivos de la maquina anfitriona o de otros contenedores de manera segura (son completamente gestionados por Docker)
+**Data volumens:** Son la forma acceder a los archivos de la maquina anfitriona o de otros contenedores de manera segura (son completamente gestionados por Docker).
 
-**Network:** Permite a los contenedores comunicación con el mundo exterior
+**Network:** Permite a los contenedores comunicación con el mundo exterior.
 
 
 ![image](https://user-images.githubusercontent.com/6383659/136436888-33488a2c-54ae-4850-867a-f4f988a1d762.png)
@@ -110,7 +110,7 @@ Al mismo tiempo los componentes de Docker permiten realizar la gestión de las m
 - Son el concepto más importante de Docker
 - A nivel de virtualización es el equivalente a una máquina virtual pero más liviana
 - Se las puede definir como un conjunto de procesos agrupados en contenedores que ocurren en una maquina local
-- El contenedor este limitado según la decisión (configuración) usada para su creación
+- El contenedor esta limitado según la decisión (configuración) usada para su creación
 - La forma más sencilla de crear un contenedor es mediante el siguiente comando:
 ```sh
 docker run {image-name}
@@ -125,11 +125,11 @@ Al crear un contendor se ejecuta un conjunto de procesos que dictan el flujo de 
 3. Terminación del main process (Proceso principal)
 4. Stop del contenedor (detención del contenedor y todos sus procesos internos)
 
-> **Nota:** El main process es el proceso principal configurado que será lanzado cuando el contenedor se inicia, se destaca que cuando el main process falla o termina el contenedor termina su ejecución y se realiza un **Stop** del mismo
+> **Nota:** El main process es el proceso principal configurado que será lanzado cuando el contenedor se inicia, se destaca que cuando el main process falla o termina el contenedor termina su ejecución y se realiza un **Stop** del mismo.
 
 ## Exponer contenedores a la maquina local
 
-El acceso de un contenedor a los componentes de una maquina local se encuentra limitado según la definió que fue usada para si creación, sin embargo se puede exponer un acceso al contenedor mediante la configuración de puertos (tal como se realizaría con un servidor) mediante el siguiente comando:
+El acceso de un contenedor a los componentes de una maquina local se encuentra limitado según la definición que fue usada para su creación sin embargo, se puede exponer un acceso al contenedor mediante la configuración de puertos (tal como se realizaría con un servidor) mediante el siguiente comando:
 
 ```sh
 docker run --name {container-name} -p {local-port}:{container-port} {image-name}
@@ -148,11 +148,11 @@ La información de los archivos y carpetas es gestionada por Docker de dos forma
 
 
 ### By Mount
-- Esta opción permite compartir una carpeta local con el contenedor creado
-- Permite acceso completo tanto a los archivos desde la maquina local al contenedor y viceversa
-- Es una opción que debe ser usada con cuidado pues permite acceso total bidireccional y un contenedor con código maliciosos podría aprovecharse de esta característica
-- Permite que una persona pueda gestionar de manera natural los archivos compartidos, efectuando CRUD en cualquier archivo
-- Esta opción normalmente es utilizada en ambientes DEV y se des aconseja fuertemente su uso en PROD
+- Esta opción permite compartir una carpeta local con el contenedor creado.
+- Permite acceso completo tanto a los archivos desde la maquina local al contenedor y viceversa.
+- Es una opción que debe ser usada con cuidado pues permite acceso total bidireccional y un contenedor con código maliciosos podría aprovecharse de esta característica.
+- Permite que una persona pueda gestionar de manera natural los archivos compartidos, efectuando CRUD en cualquier archivo.
+- Esta opción normalmente es utilizada en ambientes DEV y se des aconseja fuertemente su uso en PROD.
 - La ejecución de un contenedor usando “By Mount” se realiza con el siguiente comando:
  
 ```sh
@@ -165,10 +165,10 @@ docker run --name ubuntu_container -v C/users/example:/example ubuntu
 
 ### Volumens
 
-- En esta opción Docker se encarga de crear un "Volumen" completamente y únicamente gestionado por Docker
-- El volumen no tiene acceso a componentes de los archivos locales del computador anfitrión
-- Es una opción mucho más segura que By Mount, por cuanto es la opción que normalmente se usa en PROD
-- Los archivos están convertidos para ser gestionados por Docker, por cuanto una persona normalmente no los puede editar ni modificar desde fuera del contendor
+- En esta opción Docker se encarga de crear un "Volumen" completamente y únicamente gestionado por Docker.
+- El volumen no tiene acceso a componentes de los archivos locales del computador anfitrión.
+- Es una opción mucho más segura que By Mount, por cuanto es la opción que normalmente se usa en PROD.
+- Los archivos están convertidos para ser gestionados por Docker, por cuanto una persona normalmente no los puede editar ni modificar desde fuera del contendor.
 - La ejecución de un contenedor usando “Volumens” se realiza con el siguiente comando:
 
 ```sh
@@ -229,16 +229,16 @@ La estructura clásica de un Dockerfile es la siguiente:
 Comandos útiles para gestión de imágenes
 
 **Buid de imágenes**
-la bandera -t indica que la imagen será de DEV y el '.' indica el contexto (directorio) usado para la creación
+la bandera -t indica que la imagen será de DEV y el '.' indica el contexto (directorio) usado para la creación.
 ```sh
 docker build -t {image-name} .
 ```
 
-> **Nota:** Para poder aprovechar el sistema de capas y el cacheado de Docker utilizado durante la compilación de imágenes se debe colocar las capas de la imagen de tal forma que se vaya de lo más genérico a lo más específico y que en las capas inferiores se realicen los cambios más específicos según sea necesario
+> **Nota:** Para poder aprovechar el sistema de capas y el cacheado de Docker utilizado durante la compilación de imágenes se debe colocar las capas de la imagen de tal forma que se vaya de lo más genérico a lo más específico, y en las capas inferiores se realicen los cambios más específicos según sea necesario.
 
 ### Bonus
 
-Adicional se debe mencionar que al crear una imagen esta será tagueada asignado una versión de forma automática, esta versión por defecto siempre será "latest"
+Adicional se debe mencionar que al crear una imagen esta será tagueada asignado una versión de forma automática, esta versión por defecto siempre será "latest".
 
 Para cambiar el nombre de un tag se puede usar el siguiente comando:
 
@@ -272,9 +272,9 @@ docker history {name}
 
 ## Docker Network
 
-Uno de los puntos más importantes al utilizar Docker es poder tener la capacidad de que múltiples contendores se comuniquen entre sí, sin embargo, como ya se mencionó cada contenedor es autocontenido y autosuficiente, por cuanto para lograr una comunicación entre ellos se utiliza una nueva herramienta proporcionada por Docker llamada "Docker Network"
+Uno de los puntos más importantes al utilizar Docker es poder tener la capacidad de que múltiples contendores se comuniquen entre sí, sin embargo, como ya se mencionó cada contenedor es autocontenido y autosuficiente, por cuanto para lograr una comunicación entre ellos se utiliza una nueva herramienta proporcionada por Docker llamada "Docker Network".
 
-Tal como el nombre lo sugiere Docker Network es una red de contendores que intenta simular una red real mediante la cual se cominearían los ordenadores en ambientes PROD
+Tal como el nombre lo sugiere Docker Network es una red de contendores que intenta simular una red real mediante la cual se cominearían los ordenadores en ambientes PROD.
 
 Para crear una red de Docker se realiza con el siguiente comando:
 
@@ -361,7 +361,7 @@ Es un archivo utilizado para evitar montar archivos no deseados dentro de la ima
 
 ### Bonus
 
-Al momento de ejecutar instrucciones en la imagen se recomienda utilizad el formato Exec form, puesto que de esta forma se permite enviar señales al contenedor de forma directa (en cambio al usar la forma **shell form** el main process se ejecuta como un shell hijo por cuanto no pasan señales al sistem operativo). 
+Al momento de ejecutar instrucciones en la imagen se recomienda utilizar el formato Exec form, puesto que de esta forma se permite enviar señales al contenedor de forma directa (en cambio al usar la forma **shell form** el main process se ejecuta como un shell hijo por cuanto no pasan señales al sistem operativo). 
 
 Ejemplo de formas de ejecución:
 
