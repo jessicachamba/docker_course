@@ -315,10 +315,29 @@ docker run -d -name mongo_db --env  MONGO_URL=mongodb://db:27017/test mongo
 
 Es la forma de hacer todas las configuraciones previamente mencionadas de manera fácil y eficaz. las características de este elemento son:
 
-- Se utiliza un archivo tipo yml el cual debe tener el siguiente nombre docker-compose.yml 
+- Se utiliza un archivo tipo yml el cual debe tener el siguiente nombre "docker-compose.yml" 
 - El archivo debe estar en el directorio raíz en el cual se levanta el proyecto
 - Dentro de este archivo se configuran servicios dentro de las cuales se especifican los contendores he imágenes usados
 - Un servicio puede tener uno o más contendedores configurados
+
+Un ejemplo de una estructura común de este archivo para react se muestra a continuación:
+
+```
+version : "3"
+
+services:
+  app:
+    image: cour_redux
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/app
+      - /home/src/node_modules
+```
+
+> **Nota:** Se destaca que la variable de entorno "CHOKIDAR_USEPOLLING"
 
 Los siguientes comandos se utilizan para gestionar el Docker compose
 
