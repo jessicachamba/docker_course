@@ -379,7 +379,16 @@ Este archivo "docker_compose.override.yml" tiene precedencia sobre el original a
 
 ## Docker Ignore
 
-Es un archivo utilizado para evitar montar archivos no deseados dentro de la imagen utilizada para la creación del contendor
+El ".dockerignore" es un archivo utilizado para evitar montar archivos no deseados dentro de la imagen utilizada para la creación del contendor
+
+Ejemplo tipo de .dockerignore
+
+```
+.git
+.gitignore
+README.md
+node_modules
+```
 
 
 
