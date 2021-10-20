@@ -1,14 +1,14 @@
 # Manual instructivo de Docker
 ## Tabla de contenidos
 
- * [Que es Docker](#que-es-docker)
+ * [¿Qué es Docker?](#que-es-docker)
  * [Instalando Docker](#instalando-docker)
- * [Como trabaja Docker](#como-trabaja-docker)
+ * [¿Cómo trabaja Docker?](#como-trabaja-docker)
  * [Contenedores](#contenedores)
  * [Ciclo de vida de un contenedor](#ciclo-de-vida-de-un-contenedor)
- * [Exponer contenedores a la maquina local](#exponer-contenedores-a-la-maquina-local)
- * [Informacion By Mount y Volumens](#informacion-by-mount-y-volumens)
- * [Las imagenes en Docker](#las-imágenes-en-docker)
+ * [Exponer contenedores a la máquina local](#exponer-contenedores-a-la-maquina-local)
+ * [Información By Mount y Volumens](#informacion-by-mount-y-volumens)
+ * [Las imágenes en Docker](#las-imágenes-en-docker)
  * [Docker Network](#docker-network)
  * [Asignando variables de entorno](#asignando-variables-de-entorno)
  * [Docker Compose](#docker-compose)
@@ -17,7 +17,7 @@
 
 
 
-## Que es Docker
+## ¿Qué es Docker?
 
 Docker es una plataforma que nos permite resolver los 3 grandes problemas del desarrollo de software, estos problemas son:
 
@@ -25,7 +25,7 @@ Docker es una plataforma que nos permite resolver los 3 grandes problemas del de
 
 **Distribuir:** Estos problemas se refieren en el sentido de la divergencia de las versiones del proyecto en los repositorios (V.1, V.2, …, V. N), divergencia en artefactos (el código se convierte en artefactos para su transporte a donde se debe ejecutar, Eje .JAR, APK, DLL, etc.) y control de versiones de código.
 
-**Ejecutar:** Son problemas relacionados a las maquinas donde se van a ejecutar los programas y muy regularmente las maquinas PROD son diferentes a las maquinas DEV, los problemas más comunes son: compatibilidad entre ambientes (PROD, DEV), dependencias, disponibilidad de servicios, recursos de hardware.
+**Ejecutar:** Son problemas relacionados a las máquinas donde se van a ejecutar los programas y muy regularmente las máquinas PROD son diferentes a las máquinas DEV, los problemas más comunes son: compatibilidad entre ambientes (PROD, DEV), dependencias, disponibilidad de servicios, recursos de hardware.
 
 ## Instalando Docker
 
@@ -37,9 +37,9 @@ El proceso de instalación de Docker tanto para Mac,Linus o Windows es sumamente
 * (Fedora)[https://docs.docker.com/engine/install/fedora/]
 * (Ubuntu)[https://docs.docker.com/engine/install/ubuntu/]
 
-> **Nota:** Adicional si se esta utilizndo Windows 10 en su version Home se debe realizar el siguiente proceso:
+> **Nota:** Adicional si se esta utilizndo Windows 10 en su versión Home se debe realizar el siguiente proceso:
 
-1. Activa estas casillas de Hypervisor, Maquina Virtual y Subystem for Linux.
+1. Activa estas casillas de Hypervisor, Máquina Virtual y Subystem for Linux.
  
  ![image](https://user-images.githubusercontent.com/6383659/136433180-07d46873-7096-4048-b331-79c53dec8764.png)
 
@@ -51,19 +51,19 @@ El proceso de instalación de Docker tanto para Mac,Linus o Windows es sumamente
 4. Prueba los comandos de docker desde la terminal de wsl2.
 
 
-## Como trabaja Docker
+## ¿Cómo trabaja Docker?
 
 Docker enfrenta los problemas del desarrollo utilizando un enfoque que originalmente fue concebido con las antiguas máquinas virtuales, pero llevando la solución a un nivel muy superior en eficiencia y optimización de recursos.
 
-En el enfoque tradicional de la "Virtualización" como solución de los problemas de la construcción de software la idea era muy simple, utilizar maquinas virtuales que permitieran a los desarrolladores emular los ambientes productivos o de desarrollo según fuera necesario, sin embargo, este enfoque tiene múltiples problemas entre los cuales destacan:
+En el enfoque tradicional de la "Virtualización" como solución de los problemas de la construcción de software la idea era muy simple, utilizar máquinas virtuales que permitieran a los desarrolladores emular los ambientes productivos o de desarrollo según fuera necesario, sin embargo, este enfoque tiene múltiples problemas entre los cuales destacan:
 
-**Peso:** Las máquinas virtuales son pesadas y lentas, ocupando varias GB de espacio, sumado a que si se desea disponer de dos ambientes que implementen el mismo SO es necesario duplicar todos los archivos del sistema origen, dando como resultado mucha información repetida y no relevante. Además, si imaginamos un contexto donde tenemos la necesidad de trabajar con múltiples sistemas operativos, nos encontraremos en una situación sumamente compleja, en la cual muchas veces no contaremos con el espacio necesario para trabajar.
+**Peso:** Las máquinas virtuales son pesadas y lentas, ocupando varias gigabyte (GB) de espacio, sumado a que si se desea disponer de dos ambientes que implementen el mismo SO es necesario duplicar todos los archivos del sistema origen, dando como resultado mucha información repetida y no relevante. Además, si imaginamos un contexto donde tenemos la necesidad de trabajar con múltiples sistemas operativos, nos encontraremos en una situación sumamente compleja, en la cual muchas veces no contaremos con el espacio necesario para trabajar.
 
-**Costo de administración:** Al administrar múltiples máquinas virtuales cada una debe ser administrada por separado y en circunstancia en las cuales se trabaja con una cantidad considerable se maquinas virtuales el costo necesario de mantener el sistema operativo actualizado, gestionar usuarios, permisos, etc. es un punto muy importante a considerar.
+**Costo de administración:** Al administrar múltiples máquinas virtuales cada una debe ser administrada por separado y en circunstancia en las cuales se trabaja con una cantidad considerable de máquinas virtuales el costo necesario de mantener el sistema operativo actualizado, gestionar usuarios, permisos, etc. es un punto muy importante a considerar.
 
-**Diferencia entre formatos:** A lo largo de los  años las diferentes corporaciones han ideado un conjunto de formatos para trabajar con máquinas virtuales (VMDK, VDI, VHD) sin embargo la inexistencia de un estándar en la industria  puede ser un problema en especial cuando se quiere migrar el contenido de una maquina visual a otra.
+**Diferencia entre formatos:** A lo largo de los  años las diferentes corporaciones han ideado un conjunto de formatos para trabajar con máquinas virtuales (VMDK, VDI, VHD) sin embargo la inexistencia de un estándar en la industria puede ser un problema en especial cuando se quiere migrar el contenido de una máquina visual a otra.
 
-Ante estos problemas la respuesta de Docker fue muy sencilla "estandarizar la conceptualización de la virtualización mediante el uso de contenedores" y aunque esto parezca una trabalenguas no es más que el utilizar contenedores como unidad fundamental de la virtualización, remplazando la necesidad de tener que virtualizar el Sistema Operativo de cada maquina virtual y brindando la posibilidad de virtualizar los componentes netamente necesarios de cada SO/programa que fuera de interés para el desarrollador.  
+Ante estos problemas la respuesta de Docker fue muy sencilla "estandarizar la conceptualización de la virtualización mediante el uso de contenedores" y aunque esto parezca una trabalenguas no es más que el utilizar contenedores como unidad fundamental de la virtualización, remplazando la necesidad de tener que virtualizar el Sistema Operativo de cada máquina virtual y brindando la posibilidad de virtualizar los componentes netamente necesarios de cada SO/programa que fuera de interés para el desarrollador.  
 
 Las ventajas de brinda Docker al utilizar los Contenedores como medio para efectuar la virtualización son los siguientes:
 
@@ -73,7 +73,7 @@ Las ventajas de brinda Docker al utilizar los Contenedores como medio para efect
 
 **Liviano:** Docker funciona con una tecnología de virtualización en capas lo que permite ahorrar espacio reutilizando el Kernel del propio sistema operativo.
 
-**Bajo acoplamiento:** Cada contenedor es autocontenido y posee todo lo q se necesita para su ejecución.
+**Bajo acoplamiento:** Cada contenedor es autocontenido y posee todo lo que se necesita para su ejecución.
 
 **Escalable:** Es fácil de escalar pues solo se necesita crear más instancias del mismo contenedor para incrementar los recursos.
 
@@ -98,7 +98,7 @@ Al mismo tiempo los componentes de Docker permiten realizar la gestión de las m
 
 **Images:** Son artefactos usados para empaquetar contenedores (son como las plantillas usadas para generar contenedores).
 
-**Data volumens:** Son la forma acceder a los archivos de la maquina anfitriona o de otros contenedores de manera segura (son completamente gestionados por Docker).
+**Data volumens:** Son la forma acceder a los archivos de la máquina anfitriona o de otros contenedores de manera segura (son completamente gestionados por Docker).
 
 **Network:** Permite a los contenedores comunicación con el mundo exterior.
 
@@ -127,9 +127,9 @@ Al crear un contendor se ejecuta un conjunto de procesos que dictan el flujo de 
 
 > **Nota:** El main process es el proceso principal configurado que será lanzado cuando el contenedor se inicia, se destaca que cuando el main process falla o termina el contenedor termina su ejecución y se realiza un **Stop** del mismo.
 
-## Exponer contenedores a la maquina local
+## Exponer contenedores a la máquina local
 
-El acceso de un contenedor a los componentes de una maquina local se encuentra limitado según la definición que fue usada para su creación sin embargo, se puede exponer un acceso al contenedor mediante la configuración de puertos (tal como se realizaría con un servidor) mediante el siguiente comando:
+El acceso de un contenedor a los componentes de una máquina local se encuentra limitado según la definición que fue usada para su creación sin embargo, se puede exponer un acceso al contenedor mediante la configuración de puertos (tal como se realizaría con un servidor) mediante el siguiente comando:
 
 ```sh
 docker run --name {container-name} -p {local-port}:{container-port} {image-name}
@@ -142,17 +142,17 @@ docker run --name ubuntu_container -p 8080:80 ubuntu
 > **Nota:** Esto es sumamente útil cuando se realiza trabajo de desarrollo con servidores tipo Node, XAMPP, etc.
 
 
-## Informacion By Mount y Volumens
+## Información By Mount y Volumens
 
 La información de los archivos y carpetas es gestionada por Docker de dos formar distintas según las necesidades de cada caso, las opciones disponibles son:
 
 
 ### By Mount
 - Esta opción permite compartir una carpeta local con el contenedor creado.
-- Permite acceso completo tanto a los archivos desde la maquina local al contenedor y viceversa.
+- Permite acceso completo tanto a los archivos desde la máquina local al contenedor y viceversa.
 - Es una opción que debe ser usada con cuidado pues permite acceso total bidireccional y un contenedor con código maliciosos podría aprovecharse de esta característica.
 - Permite que una persona pueda gestionar de manera natural los archivos compartidos, efectuando CRUD en cualquier archivo.
-- Esta opción normalmente es utilizada en ambientes DEV y se des aconseja fuertemente su uso en PROD.
+- Esta opción normalmente es utilizada en ambientes DEV y se les aconseja fuertemente su uso en PROD.
 - La ejecución de un contenedor usando “By Mount” se realiza con el siguiente comando:
  
 ```sh
@@ -373,9 +373,9 @@ docker-compose build
 
 ### Bonus 
 
-En el uso de control de versiones para evitar cambios indeseados en el trabajo colaborativo se utiliza el compose-overide el cual permite sobre escribir para poder tener distinción entre PROD y DEV.
+En el uso de control de versiones para evitar cambios indeseados en el trabajo colaborativo se utiliza el compose-overide el cual permite sobrescribir para poder tener distinción entre PROD y DEV.
 
-Este archivo "docker_compose.override.yml" tiene precedencia sobre el original al momento de ejecutar la herramienta, además solo se deben usar los ports de la maquina local en uno de los 2 archivos.
+Este archivo "docker_compose.override.yml" tiene precedencia sobre el original al momento de ejecutar la herramienta, además solo se deben usar los ports de la máquina local en uno de los 2 archivos.
 
 ## Docker Ignore
 
