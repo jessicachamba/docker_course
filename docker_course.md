@@ -246,6 +246,11 @@ Para cambiar el nombre de un tag se puede usar el siguiente comando:
 docker tag {old-name} {new-name}
 ```
 
+Para listar las imagenes disponibles en el equipo:
+```
+docker image ls
+```
+
 Adicional se debe mencionar que las imágenes generadas de forma local pueden ser almacenadas en Docker Hub para que puedan ser usadas por el público en general. Para efectuar este proceso es necesario tener una cuenta creada dentro de Docker Hub y efectuar el push correspondiente de la imagen tal como se realiza con la herramienta de control de versiones Git, los pasos para ejecutar el push de imagen son los siguientes:
 
 
@@ -448,6 +453,11 @@ docker cp {container route} {Re-name local file}
 Crear imagen, la bandera -t indica el nombre o tag usado en la imagen (el formato usado en el nombre del tag es username/program), el contexto por lo regular se usa "." para la carpeta en la que uno se encuentra
 ```sh
 docker build -t {image-name} {context route}
+```
+---
+Para listar las imagenes disponibles en el equipo:
+```
+docker image ls
 ```
 ---
 Cambiar de Tag a una imagen
